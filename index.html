@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>Start</button>
+</body>
+<script type="module">
+
+    import { MuseClient } from 'muse-js'
+
+    const button = document.querySelector('button')
+    button.onclick = async () => {
+
+
+        let client = new MuseClient();
+        await client.connect();
+
+        await client.start();
+
+        client.eegReadings.subscribe(reading => {
+            console.log(reading);
+        });
+
+        client.telemetryData.subscribe(telemetry => {
+            console.log(telemetry);
+        });
+
+        client.accelerometerData.subscribe(acceleration => {
+            console.log(acceleration);
+        });
+
+    }
+
+</script>
+</html>
